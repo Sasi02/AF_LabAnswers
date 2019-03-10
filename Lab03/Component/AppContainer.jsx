@@ -1,13 +1,12 @@
-'use strict';
 
 import React, { Component } from 'react';
-
 import Users from './Users';
 import AddUser from './AddUser';
 
 export default class AppContainer extends Component {
     constructor(props){
         super(props);
+
         this.state = {
             users: [{
                 id: Date.now(),
@@ -22,11 +21,12 @@ export default class AppContainer extends Component {
   
     render() {
         return (
-        <div>
-            <h2>Users App</h2>
-            <AddUser addUser={user => this.addUser(user)} />
-            <Users users={this.state.users} />
-        </div>
+            <div>
+                <h2>Users App</h2>
+                
+                <AddUser addUser={user => this.addUser(user)} />
+                <Users users={this.state.users} />
+            </div>
         );
     }
 }

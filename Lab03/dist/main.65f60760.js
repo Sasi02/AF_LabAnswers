@@ -26449,7 +26449,7 @@ if ("development" !== 'production') {
   module.exports = require('./factoryWithThrowingShims')();
 }
 },{"react-is":"node_modules/react-is/index.js","./factoryWithTypeCheckers":"node_modules/prop-types/factoryWithTypeCheckers.js"}],"Component/User.jsx":[function(require,module,exports) {
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -26511,7 +26511,9 @@ function (_Component) {
   _createClass(Users, null, [{
     key: "propTypes",
     get: function get() {
-      users: _propTypes.default.array;
+      return {
+        users: _propTypes.default.array
+      };
     }
   }]);
 
@@ -26539,7 +26541,7 @@ function (_Component) {
 
 exports.default = Users;
 },{"react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js","./User.jsx":"Component/User.jsx"}],"Component/AddUser.jsx":[function(require,module,exports) {
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -26637,7 +26639,7 @@ function (_Component) {
 
 exports.default = AddUser;
 },{"react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js"}],"Component/AppContainer.jsx":[function(require,module,exports) {
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -26724,7 +26726,7 @@ function (_Component) {
 
 exports.default = AppContainer;
 },{"react":"node_modules/react/index.js","./Users":"Component/Users.jsx","./AddUser":"Component/AddUser.jsx"}],"main.jsx":[function(require,module,exports) {
-'use strict';
+"use strict";
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -26762,7 +26764,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53979" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50398" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

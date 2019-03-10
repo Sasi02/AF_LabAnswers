@@ -1,4 +1,3 @@
-'use strict';
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -17,12 +16,14 @@ export default class AddUser extends Component {
     onNameChange(event){
         event.preventDefault();
         event.stopPropagation();
+
         this.name = event.target.value;
     }
 
     onSubmit(event){
         event.preventDefault();
         event.stopPropagation();
+        
         if(this.name){
             this.props.addUser({name: this.name});
             this.name = '';

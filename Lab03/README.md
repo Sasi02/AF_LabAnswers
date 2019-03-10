@@ -1,6 +1,6 @@
 # **Application frameworks**
 ##### **Lab session 3 – React JS**
-Objective: Teach main features of React JS 
+**Objective:** Teach main features of React JS 
 
 1. Create a node project.
 ```

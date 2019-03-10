@@ -1,11 +1,13 @@
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import User from './User.jsx';
 
 export default class Users extends Component {
     static get propTypes(){
-        users: PropTypes.array
+        return {
+            users: PropTypes.array
+        };
     }
 
     constructor(props){

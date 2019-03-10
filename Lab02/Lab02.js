@@ -141,3 +141,164 @@ function fetchUsers(){
 }
 
 fetchUsers();
+
+var promise = new Promise((response, reject) => {
+    fetch('https://api.github.com/users').then(
+        function(response){
+            return response.json();
+        }).then (function(reject){
+            console.log(reject);
+        });
+})
+
+console.log(promise);
+
+/*
+4. Classes in JavaScript
+    ● Create a class named Vehicle using a function.
+
+    ● Add property named type to the class (this.type). Assign a value to that variable using a
+    constructor argument.
+
+    ● Add a function to its prototype named drive (Vehicle.prototype.print...). Print ‘Vehicle is
+    driving’ in the function body.
+
+    ● Add VehicleCount (Vehicle.VehicleCount) as a static variable.
+
+    ● Increase the number of VehicleCount (Vehicle.VehicleCount++) by one inside the
+    constructor.
+
+    ● Create an object from Vehicle class (new Vehicle) and check static variable value, type
+    property value and function works.
+
+    ● Create a class named Car and extend the class Vehicle (Car.prototype =
+    Object.create(Vehicle.prototype); Car.prototype.constructor = Car).
+
+    ● Add a new method called balanceWheels to Car and print ‘Wheels are balanced’ in the
+    function body.
+
+    ● Call balanceWheels and drive methods using a car object and verify the functionality.
+
+    ● Check the static variable value and type variable value. Notice that they are not correct.
+
+    ● The reason for the above behavior is that we didn’t call the parent constructor from the
+    child class. Do this by using the call method (in Car constructor function Vehicle.call(this,
+    type);
+
+    ● Re-validate the values.
+*/
+
+function VehicleFour(type) {
+    VehicleFour.VehicleCount++;
+    this.type = type;
+}
+
+VehicleFour.prototype.drive = function () {
+    console.log('Vehicle is driving');
+};
+
+VehicleFour.VehicleCount = 0;
+
+var vehicleFour = new VehicleFour('Toyota');
+
+console.log(vehicleFour.type +' and '+ VehicleFour.VehicleCount);
+
+vehicleFour.drive();
+
+function Car(type) {
+    VehicleFour.call(this, type);
+}
+
+Car.prototype = Object.create(VehicleFour.prototype);
+
+Car.prototype.constructor = Car;
+
+Car.prototype.balanceWheels = function () {
+    console.log('All Wheels are balanced');
+};
+
+var car = new Car('Nissan');
+
+car.drive();
+
+car.balanceWheels();
+
+console.log(car.type, VehicleFour.VehicleCount);
+
+/*
+5. Declare variables using const and let keywords and observe the difference.
+*/
+
+let vehicleNameFive = 'Toyota';
+
+vehicleNameFive = 'Nissan';
+
+const COUNTRYFIVE = 'Japan';
+
+console.log(vehicleNameFive, COUNTRYFIVE);
+
+/*
+6. Use arrow functions.
+*/
+
+function fetchUsers() {
+    return fetch('https://api.github.com/users')
+    .then(response => response.json());
+}
+
+fetchUsers().then(json => {
+    console.log(json);
+});
+
+/*
+7. Try exercise 3 with async/await.
+*/
+
+async function fetchUsersAsync() {
+    const response = await fetch('https://api.github.com/users');
+
+    const json = await response.json();
+
+    console.log(json);
+}
+
+fetchUsersAsync();
+
+/*
+8. Try exercise 4 class, extends, get, set and super keywords.
+*/
+
+class VehicleEight{
+    constructor(type) {
+        this.type = type
+        VehicleEight.VehicleCount++;
+
+    }
+
+    drive(){
+        console.log('Vehicle is driving')
+    }
+
+}
+
+VehicleEight.VehicleCount = 0;
+
+let object = new VehicleEight('Toyota')
+
+object.drive()
+
+console.log(VehicleEight.VehicleCount)
+
+class CarEight extends VehicleEight{
+
+    balanceWheels() {
+        console.log('Wheels are balanced')
+    }
+}
+
+let carObject = new CarEight('Nissan')
+
+carObject.drive()
+carObject.balanceWheels()
+
+console.log(VehicleEight.VehicleCount, carObject.type)
