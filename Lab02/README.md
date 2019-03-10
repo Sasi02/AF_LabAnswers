@@ -1,5 +1,5 @@
 # **Application frameworks**
-##Lab session 2 – JavaScript
+## Lab session 2 – JavaScript
 
 **Objective:** Teach set of basic concepts in JavaScript programming language.
 
