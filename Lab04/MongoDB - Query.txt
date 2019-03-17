@@ -1,0 +1,251 @@
+Microsoft Windows [Version 10.0.17134.648]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\WINDOWS\system32>net start MongoDBSas
+The MongoDBSas service is starting..
+The MongoDBSas service was started successfully.
+
+
+C:\WINDOWS\system32>mongo
+MongoDB shell version v4.0.6
+connecting to: mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("66d3d303-3d95-4227-b6db-17072a1e5d3d") }
+MongoDB server version: 4.0.6
+Server has startup warnings:
+2019-03-17T07:48:29.518+0530 I CONTROL  [initandlisten]
+2019-03-17T07:48:29.518+0530 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2019-03-17T07:48:29.518+0530 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2019-03-17T07:48:29.518+0530 I CONTROL  [initandlisten]
+2019-03-17T07:48:29.518+0530 I CONTROL  [initandlisten] ** WARNING: This server is bound to localhost.
+2019-03-17T07:48:29.518+0530 I CONTROL  [initandlisten] **          Remote systems will be unable to connect to this server.
+2019-03-17T07:48:29.518+0530 I CONTROL  [initandlisten] **          Start the server with --bind_ip <address> to specify which IP
+2019-03-17T07:48:29.518+0530 I CONTROL  [initandlisten] **          addresses it should serve responses from, or with --bind_ip_all to
+2019-03-17T07:48:29.518+0530 I CONTROL  [initandlisten] **          bind to all interfaces. If this behavior is desired, start the
+2019-03-17T07:48:29.519+0530 I CONTROL  [initandlisten] **          server with --bind_ip 127.0.0.1 to disable this warning.
+2019-03-17T07:48:29.519+0530 I CONTROL  [initandlisten]
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
+
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+> use sliit
+switched to db sliit
+> db
+sliit
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> db
+sliit
+> db.person.insert({"name": "John", "dateOfBirth": "1990-01-01T00:00:00Z", "subjects": ["Application Frameworks", Computer Architecture"]})
+2019-03-17T07:53:01.355+0530 E QUERY    [js] SyntaxError: missing ] after element list @(shell):1:121
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> db.person.insert({"name": "John", "dateOfBirth": "1990-01-01T00:00:00Z", "subjects": ["Application Frameworks", Computer Architecture"]})
+2019-03-17T07:54:47.801+0530 E QUERY    [js] SyntaxError: missing ] after element list @(shell):1:121
+> db.person.insert({"name": "John", "dateOfBirth": "1990-01-01T00:00:00Z", "subjects": [ "Application Frameworks", Computer Architecture" ]})
+2019-03-17T07:55:18.875+0530 E QUERY    [js] SyntaxError: missing ] after element list @(shell):1:122
+> db.person.insert({"name": "John", "dateOfBirth": "1990-01-01T00:00:00Z", "subjects": [ "Application Frameworks", "Computer Architecture" ]})
+WriteResult({ "nInserted" : 1 })
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+sliit   0.000GB
+> db.person.find({"name": "John"})
+{ "_id" : ObjectId("5c8db057df8128b9040688ba"), "name" : "John", "dateOfBirth" : "1990-01-01T00:00:00Z", "subjects" : [ "Application Frameworks", "Computer Architecture" ] }
+> db.person.find({"name": "John"}).pretty()
+{
+        "_id" : ObjectId("5c8db057df8128b9040688ba"),
+        "name" : "John",
+        "dateOfBirth" : "1990-01-01T00:00:00Z",
+        "subjects" : [
+                "Application Frameworks",
+                "Computer Architecture"
+        ]
+}
+> db.person.find({"_id": "555"}).pretty()
+> db.person.find({"_id": "5c8"}).pretty()
+> db.person.find({"_id": "5c8db057df8128b9040688ba"}).pretty()
+> db.person.find({"_id": ObjectId("5c8db057df8128b9040688ba")}).pretty()
+{
+        "_id" : ObjectId("5c8db057df8128b9040688ba"),
+        "name" : "John",
+        "dateOfBirth" : "1990-01-01T00:00:00Z",
+        "subjects" : [
+                "Application Frameworks",
+                "Computer Architecture"
+        ]
+}
+> db.person.find({"_id": 1}).pretty()
+> db.person.find({"_id": "1"}).pretty()
+> db.person.find({"_id": ObjectId("5c8db057df8128b9040688ba")}).pretty()
+{
+        "_id" : ObjectId("5c8db057df8128b9040688ba"),
+        "name" : "John",
+        "dateOfBirth" : "1990-01-01T00:00:00Z",
+        "subjects" : [
+                "Application Frameworks",
+                "Computer Architecture"
+        ]
+}
+> db.person.update({"name": "John"}, {$push: {"subjects": "Distributed Systems"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.person.find({"_id": ObjectId("5c8db057df8128b9040688ba")}).pretty()
+{
+        "_id" : ObjectId("5c8db057df8128b9040688ba"),
+        "name" : "John",
+        "dateOfBirth" : "1990-01-01T00:00:00Z",
+        "subjects" : [
+                "Application Frameworks",
+                "Computer Architecture",
+                "Distributed Systems"
+        ]
+}
+> db.person.insert({"name": "Smith", "dateOfBirth": "1990-01-15T00:00:00Z", "subjects": [ "Application Frameworks", "Computer Architecture" ], "isActive": true})
+WriteResult({ "nInserted" : 1 })
+> db.person.insert({"name": "Elijah", "dateOfBirth": "1990-01-20T00:00:00Z", "subjects": [ "Application Frameworks", "Computer Architecture" ], "isActive": false})
+WriteResult({ "nInserted" : 1 })
+> db.person.find().pretty()
+{
+        "_id" : ObjectId("5c8db057df8128b9040688ba"),
+        "name" : "John",
+        "dateOfBirth" : "1990-01-01T00:00:00Z",
+        "subjects" : [
+                "Application Frameworks",
+                "Computer Architecture",
+                "Distributed Systems"
+        ]
+}
+{
+        "_id" : ObjectId("5c8db45ddf8128b9040688bb"),
+        "name" : "Smith",
+        "dateOfBirth" : "1990-01-15T00:00:00Z",
+        "subjects" : [
+                "Application Frameworks",
+                "Computer Architecture"
+        ],
+        "isActive" : true
+}
+{
+        "_id" : ObjectId("5c8db484df8128b9040688bc"),
+        "name" : "Elijah",
+        "dateOfBirth" : "1990-01-20T00:00:00Z",
+        "subjects" : [
+                "Application Frameworks",
+                "Computer Architecture"
+        ],
+        "isActive" : false
+}
+> db.person.insert({"name": "Smith", "dateOfBirth": "1990-01-15T00:00:00Z", "subjects": [ "Application Frameworks", "Computer Architecture" ], "isActive": false})
+WriteResult({ "nInserted" : 1 })
+> db.person.find($and{ {"name": "John"}, {"isActive": false} }).pretty()
+2019-03-17T08:16:36.165+0530 E QUERY    [js] SyntaxError: missing ) after argument list @(shell):1:19
+> db.person.find($and:[ {"name": "John"}, {"isActive": false} ]).pretty()
+2019-03-17T08:17:17.371+0530 E QUERY    [js] SyntaxError: missing ) after argument list @(shell):1:19
+> db.person.find({$and:[ {"name": "John"}, {"isActive": false} ]}).pretty()
+> db.person.find({$and:[ {"name": "Smith"}, {"isActive": false} ]}).pretty()
+{
+        "_id" : ObjectId("5c8db4c4df8128b9040688bd"),
+        "name" : "Smith",
+        "dateOfBirth" : "1990-01-15T00:00:00Z",
+        "subjects" : [
+                "Application Frameworks",
+                "Computer Architecture"
+        ],
+        "isActive" : false
+}
+> db.person.update({"name": "John"}, {"isActive": false })
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.person.find({"_id": ObjectId("5c8db057df8128b9040688ba")}).pretty()
+{ "_id" : ObjectId("5c8db057df8128b9040688ba"), "isActive" : false }
+> db.person.find().pretty()
+{ "_id" : ObjectId("5c8db057df8128b9040688ba"), "isActive" : false }
+{
+        "_id" : ObjectId("5c8db45ddf8128b9040688bb"),
+        "name" : "Smith",
+        "dateOfBirth" : "1990-01-15T00:00:00Z",
+        "subjects" : [
+                "Application Frameworks",
+                "Computer Architecture"
+        ],
+        "isActive" : true
+}
+{
+        "_id" : ObjectId("5c8db484df8128b9040688bc"),
+        "name" : "Elijah",
+        "dateOfBirth" : "1990-01-20T00:00:00Z",
+        "subjects" : [
+                "Application Frameworks",
+                "Computer Architecture"
+        ],
+        "isActive" : false
+}
+{
+        "_id" : ObjectId("5c8db4c4df8128b9040688bd"),
+        "name" : "Smith",
+        "dateOfBirth" : "1990-01-15T00:00:00Z",
+        "subjects" : [
+                "Application Frameworks",
+                "Computer Architecture"
+        ],
+        "isActive" : false
+}
+> db.person.update({"_id": ObjectId("5c8db4c4df8128b9040688bd")},{"name": "John", "dateOfBirth": "1990-01-01T00:00:00Z", "subjects": ["Application Frameworks", Computer Architecture", "Distributed Systems"]})
+2019-03-17T08:22:48.338+0530 E QUERY    [js] SyntaxError: missing ] after element list @(shell):1:167
+> db.person.update({"_id": ObjectId("5c8db4c4df8128b9040688bd")},{"name": "John", "dateOfBirth": "1990-01-01T00:00:00Z", "subjects": ["Application Frameworks", "Computer Architecture", "Distributed Systems"]})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.person.insert({"name": "Smith", "dateOfBirth": "1990-01-15T00:00:00Z", "subjects": [ "Application Frameworks", "Computer Architecture" ], "isActive": false})
+WriteResult({ "nInserted" : 1 })
+> db.person.update({$and: [{"name": "Smith"}, {"isActive": false}]}, {$set: [{"isActive": false }, {$push: {"subjects": "Distributed Systems"}}]})
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 0,
+        "nModified" : 0,
+        "writeError" : {
+                "code" : 9,
+                "errmsg" : "Modifiers operate on fields but we found type array instead. For example: {$mod: {<field>: ...}} not {$set: [ { isActive: false }, { $push: { subjects: \"Distributed Systems\" } } ]}"
+        }
+})
+> db.person.update({$and: [{"name": "Smith"}, {"isActive": false}]}, {$set: {"isActive": false }}, {$push: {subjects: "Distributed Systems"}}]})
+2019-03-17T08:34:41.051+0530 E QUERY    [js] SyntaxError: missing ) after argument list @(shell):1:139
+> db.person.update({$and: [{"name": "Smith"}, {"isActive": false}]}, {$set: [{"isActive": false }, {$push: {subjects: "Distributed Systems"}}]})
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 0,
+        "nModified" : 0,
+        "writeError" : {
+                "code" : 9,
+                "errmsg" : "Modifiers operate on fields but we found type array instead. For example: {$mod: {<field>: ...}} not {$set: [ { isActive: false }, { $push: { subjects: \"Distributed Systems\" } } ]}"
+        }
+})
+> db.person.update({$and: [{"name": "Smith"}, {"isActive": true}]}, {$set: {$push: {"subjects": "Distributed Systems"} } })
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 0,
+        "nModified" : 0,
+        "writeError" : {
+                "code" : 52,
+                "errmsg" : "The dollar ($) prefixed field '$push' in '$push' is not valid for storage."
+        }
+})
+> db.person.update({$and: [{"name": "Smith"}, {"isActive": true}]}, {$push: {"subjects": "Distributed Systems"} })
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.person.update({"name": "John"}, {$set: {"isActive": false }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.person.delete({"name": "John"})
+2019-03-17T08:41:13.883+0530 E QUERY    [js] TypeError: db.person.delete is not a function :
+@(shell):1:1
+> db.person.remove({"name": "John"})
+WriteResult({ "nRemoved" : 1 })
+>
