@@ -6,5 +6,5 @@ This Repository for Application Framework Lab sheet Answers
 - Lab 04 - MongoDB - Complete
 - Lab 05 - Node Js - Complete
 - Lab 06 - Express Js - Complete
-- Lab 06 - Maven and Spring Boot - Complete
-- Lab 06 - Spring Boot - 
+- Lab 07 - Maven and Spring Boot - Complete
+- Lab 08 - Spring Boot - 
